@@ -16,6 +16,7 @@ func main() {
 	activeStr := "true"
 	scoreStr := "95.5"
 
+	sextStr := "ff" // 16 进制字符串
 	// 把字符串转为真正的数据类型
 	page, err := strconv.Atoi(pageStr)
 	if err != nil {
@@ -38,5 +39,11 @@ func main() {
 		score = 0.0 // 失败使用默认值
 	}
 
-	fmt.Printf("解析结果 - page: %d, size: %d, active: %t, score: %.2f\n", page, size, active, score)
+	sext, err := strconv.ParseInt(sextStr, 16, 64)
+	if err != nil {
+		fmt.Printf("解析 sext 失败: %v\n", err)
+		sext = 0 // 失败使用默认值
+	}
+
+	fmt.Printf("解析结果 - page: %d, size: %d, active: %t, score: %.2f, sext: %d\n", page, size, active, score, sext)
 }

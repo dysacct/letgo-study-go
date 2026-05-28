@@ -50,4 +50,35 @@ func main() {
 	// 计算偏移量（SQL分页用）
 	offset := (page - 1) * size
 	fmt.Printf("SQL: SELECT * FROM users LIMIT %d OFFSET %d\n", size, offset)
+
+	// ---- 场景2： 构造响应数据 ----
+	fmt.Println("\n==== 构造响应 ==== ")
+
+	// 把计算结果转回字符串 (用于 HTTP JSON 响应)
+	totalCount := 142
+	respBody := fmt.Sprintf(
+		`{"page":%d, "size":%d,"total":%s}`,
+		page, size, strconv.Itoa(totalCount), // Itoa: int -> string
+	)
+	fmt.Println("响应数据:", respBody)
+
+	// ---- 场景3 ： 进制转换（处理颜色、权限位等） ----
+	fmt.Println("\n==== 进制转换 ====")
+
+	// 前端传来十六进制颜色值 "#FF5733"
+	hexColor := "FF5733"
+	// 转成十进制数字
+	rgb, _ := strconv.ParseInt(hexColor, 16, 64)
+	fmt.Printf("颜色 #%s → 十进制: %d\n", hexColor, rgb)
+
+	// 权限码: 二进制1101 = 十进制13
+	perm, _ := strconv.ParseInt("1101", 2, 64)
+	fmt.Printf("二进制 1101 → 十进制: %d\n", perm)
+	fmt.Printf("二进制 1101 → 十六进制: %s\n", strconv.FormatInt(perm, 16))
+
+	price := 3.10000
+
+	s := strconv.FormatFloat(price, 'f', -1, 64)
+
+	fmt.Println(s)
 }

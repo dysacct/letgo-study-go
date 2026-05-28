@@ -46,4 +46,8 @@ func main() {
 	}
 
 	fmt.Printf("解析结果 - page: %d, size: %d, active: %t, score: %.2f, sext: %d\n", page, size, active, score, sext)
+
+	// 计算偏移量（SQL分页用）
+	offset := (page - 1) * size
+	fmt.Printf("SQL: SELECT * FROM users LIMIT %d OFFSET %d\n", size, offset)
 }

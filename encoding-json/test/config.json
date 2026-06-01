@@ -1,0 +1,5 @@
+{
+    "server_port": "8080",
+    "db_host": "127.0.0.1",
+    "log_level": "info"
+}

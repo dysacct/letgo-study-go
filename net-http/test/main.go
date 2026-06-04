@@ -22,7 +22,10 @@ func loggingMiddleware(next http.Handler) http.Handler {
 		start := time.Now()
 
 		// 初始化默认状态码 200
-		wrappedWriter
+		wrappedWriter := &statusResponseWriter(ResponseWriter: w, statusCode: http.StautsOK)
+
+		// 移交控制权给下一个 Handler/路由
+		next.ServeHTTP(wrappedWriter, r)
 	})
 }
 
